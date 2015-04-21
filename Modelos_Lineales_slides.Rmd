@@ -37,7 +37,7 @@ output:
 [Robert Gentleman](http://en.wikipedia.org/wiki/Robert_Gentleman_%28statistician%29)
 en la [Universidad de Auckland](https://www.auckland.ac.nz/en.html).
 * En __1993__ se anuncia al público en general.
-* En __1995__, [Martin Mächler] convence a Ross y Robert de distribuir a R mediante la licencia
+* En __1995__, [Martin Mächler](http://stat.ethz.ch/people/maechler) convence a Ross y Robert de distribuir a R mediante la licencia
 GNU (General Public License).
 * EN __1996__, se crean las listas de correo públicas [R-help](https://stat.ethz.ch/mailman/listinfo/r-help) y [R-devel](https://stat.ethz.ch/mailman/listinfo/r-devel).
 * En __1997__ se forma el __R Core Group__ o __R Core Team__, encargado de controlar
@@ -48,6 +48,8 @@ el códgo fuende de R.
 ![Ross Ihaka](figures/rihaka.jpg)
 <b> <font color=SteelBlue face=Cambria size=7> + </font> </b>
 ![Robert Gentleman](figures/rgentleman.jpg)
+<b> <font color=SteelBlue face=Cambria size=7> + </font> </b>
+![Martin Machler](figures/mmachler.png)
 <b> <font color=SteelBlue face=Cambria size=7> = </font> </b>
 ![R](figures/logo_r.jpg)
 
@@ -95,7 +97,7 @@ __tseries, ggplot2, knitr, shiny, etc.__
 
     + [CRAN](http://cran.r-project.org)
     + [Bioconductor Project](http://bioconductor.org)
-    + [R Forge], etc.
+    + [R Forge](https://r-forge.r-project.org/), etc.
 
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Instalando paquetes </font> </b>
@@ -131,7 +133,7 @@ str(cars)
 
 La estructura de datos básica de R son los vectores, estos se dividen en:
 
-* __Vectors atómicos y Listas__
+* __Vectores atómicos y Listas__
 
 y presentan tres propiedades comunes:
 
@@ -139,17 +141,17 @@ y presentan tres propiedades comunes:
 2. Longitud (Número de elementos) `length()`
 3. Atributos (Metadata). `attributes()`
 
-
+* Para probar que una estructura de datos es un vector (con un solo atributo __names__) se utiliza la función `is.vector()`. 
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Vectores atómicos </font> </b>
 
-* Los elementos de un vector atómico son del __mismo tipo__ (comunes):
+* Los elementos de un vector atómico son del __mismo tipo__ (tipos comunes):
     + logical
     + integer
     + double (comunmente llamados numeric)
     + character
 
-* Un vector es creado mediante la función `c()`
+* Un vector es creado mediante la función `c()`, e ingresamos a la _i-ésima_ componente con `x[i]`
 
 ```{r}
 dbl_var <- c(1, 2, -1) 
@@ -158,11 +160,14 @@ log_var <- c(FALSE, TRUE, F, T) # TRUE y FALSE (T, F) se usan para crear vectore
 chr_var <- c("Source", "Stat", "Lab")
 ```
 
-* Los vectores pueden ser anidados:
+```{r, eval=FALSE}
+# tercera componente de dbl_var
+dbl_var[3]
+```
+
 
 ```{r}
-# equivalentes
-c(1, c(2, c(3,4))) ; c(1, 2, 3, 4)
+c(1, c(2, c(3,4))) ; c(1, 2, 3, 4) # los vectores pueden ser anidados
 ```
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Tipos y Tests </font> </b>
@@ -172,7 +177,6 @@ c(1, c(2, c(3,4))) ; c(1, 2, 3, 4)
     + `is.double()`
     + `is.integer()`
     + `is.logical()`
-
 ```{r}
 dbl_var <- c(1, 2, -1)
 typeof(dbl_var)
@@ -183,6 +187,7 @@ is.double(dbl_var)
 ## <b> <font color=SteelBlue face=Cambria size=7> Tipos y Tests </font> </b>
 
 ```{r}
+dbl_var <- c(1, 2, -1)
 is.atomic(dbl_var)
 ```
 
@@ -198,7 +203,9 @@ is.atomic(int_var)
 * __`is.numeric()` retorna `TRUE` para vectores double e integer__
 
 ```{r}
+dbl_var <- c(1, 2, -1)
 is.numeric(dbl_var)
+int_var <- c(3L, 7L, 1L)
 is.numeric(int_var)
 ```
 
@@ -231,4 +238,63 @@ mean(x) # proporción de TRUEs
 
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Listas </font> </b>
+* Una lista puede contener elementos de cualquier tipo. 
+* Para construir una lista se utiliza la función `list()` en lugar de `c()`. 
+```{r}
+x <- list(1:3, c("Source", "Stat", "Lab"), c(TRUE, FALSE), c(1.3, 4.5))
+str(x)
+is.atomic(x)
+```
+
+```{r, eval=FALSE}
+# coercionamos un objeto a una lista
+as.list(c("ssl", 4, 0.5))
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Listas </font> </b>
+```{r}
+x <- list(1:3, c("Source", "Stat", "Lab"), c(TRUE, FALSE), c(1.3, 4.5))
+typeof(x)
+# probamos si x es una lista
+is.list(x)
+# pasamos a vector considerando las reglas de coerción
+unlist(x)
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Listas </font> </b>
+
+* Una lista es un __vector recursivo__, es decir una lista puede contener otra lista (diferencia principal con los __vectores atómicos__)
+
+```{r}
+x <- list(list(list("Source", "Stat")))
+str(x)
+```
+
+
+```{r}
+# son equivalentes. un vector no puede contener otro vector
+c(1, c(2, c(3,4)))  ;  c(1, 2, 3, 4)
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Elementos de una lista </font> </b>
+
+* Para acceder al elemento `i` de la lista se utiliza `x[i]`, en cambio para acceder al objeto que contiene el elemento `i` se utiliza `x[[i]]` o `x$nomb_obj`.
+
+```{r}
+x <- list(1:3, c("Source", "Stat", "Lab"), nomb_obj=c(TRUE, FALSE), c(1.3, 4.5))
+x[4]
+x[[4]]
+x$nomb_obj
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Quiz </font> </b>
+
+1.
+
+
+
+
+
+
+
 
