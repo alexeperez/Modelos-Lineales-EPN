@@ -26,10 +26,11 @@ output:
 * En __2004__ Insightful añade GUIs y varías características, S-PLUS 
 * En __2008__ Insightful Corp --> TIBCO (lenguaje, 25 M)
 
-
+<p align="center">
 ![John Chambers](figures/jchambers.jpg)
 <b> <font color=SteelBlue face=Cambria size=7> = </font> </b>
 ![S-PLUS](figures/logo_splus.png)
+</p>
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Historia de R </font> </b>
 
@@ -44,6 +45,8 @@ el código fuente de R.
 * En el __2000__ se publica la primera versión de R 1.0.0.
 * En __marzo 2015__ se publica la versión 3.1.3.
 
+
+<p align="center">
 ![Ross Ihaka](figures/rihaka.jpg)
 <b> <font color=SteelBlue face=Cambria size=7> + </font> </b>
 ![Robert Gentleman](figures/rgentleman.jpg)
@@ -51,7 +54,7 @@ el código fuente de R.
 ![Martin Machler](figures/mmachler.png)
 <b> <font color=SteelBlue face=Cambria size=7> = </font> </b>
 ![R](figures/logo_r.jpg)
-
+</p>
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Características de R </font> </b>
 
@@ -155,6 +158,11 @@ sessionInfo()
 ## <b> <font color=SteelBlue face=Cambria size=7> Git & Github </font> </b>
 
 GitHub es un repositorio de archivos y proyectos el cual emplea un sistema de control de versiones conocido como Git y permite almacenar el código en repositorios de forma pública.
+
+<p align="center"> 
+![Github](figures/github.jpg)
+</p>
+
 
 La instalación y sincronización de Git & Github con RStudio se realiza de la siguiente manera:
 
