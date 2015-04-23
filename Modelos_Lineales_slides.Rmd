@@ -291,6 +291,7 @@ x$nomb_obj
 1. Enumere los tipos de datos que R puede almacenar en un vector.
 2. Cuál es la diferencia entre un vector y una lista ?. Entre una matriz y un data frame ?.
 3. Cuál es la jerarquía de coerción para los vectores ?.
+4. 
 
 
 
