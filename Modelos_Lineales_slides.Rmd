@@ -72,40 +72,100 @@ __Desventajas__
 * Moderada calidad de gráficos 3D dinámincos (nuevas mejoras)
 
 
-## <b> <font color=SteelBlue face=Cambria size=7> Diseño del R sistema </font> </b>
+## <b> <font color=SteelBlue face=Cambria size=7> Diseño del sistema R </font> </b>
 
-El sistema de __R__ se puede considerar como la interacción de dos componentes pricipales:
+El sistema de __R__ puede considerarse como la interacción de dos componentes principales:
 
 __1. Sistema Base de R.__ 
 
-- El paquete base de R contiene las funciones fundamentales que
-permiten correr el programa. Adicionalmente se necesitan paquetes tales como:
-__stats, datasets, graphics, etc.__ 
+- El paquete base de R contiene las funciones fundamentales que permiten correr el programa en sí.
 
-- Las Funciones de estos paquetes pueden ser modificadas únicamente
+Adicionalmente, al momento de instalar el programa se cargan por default paquetes estándar 
+que permiten ampliar la capacidad  de los gráficos, funciones estadísticas clásicas entre otros.
+
+Los paquetes estándar pueden ser visualizados a través del siguiente comando:
+
+```{r}
+search()
+```
+
+- Las funciones internas de estos paquetes pueden ser modificadas únicamente
 por el R Core Team.
 
+##
 
 __2. El resto.__ 
 
-- Paquetes específicos para analizar un determinado tipo de fenómenos, por ejemplo:
+- Paquetes específicos para analizar un determinado tipo de fenómeno o implementaciones de nuevos algoritmos, por ejemplo:
 
 __tseries, ggplot2, knitr, shiny, etc.__
 
-- En la actualidad existen alrededor de __5.000__ paquetes, distribuidos en varios repositorios:
+- En la actualidad existen alrededor de __6.200__ paquetes válidos en el repositorio [CRAN](http://cran.r-project.org), 
+adicionalmente, existen otros paquetes almacenados en los repositorios:
 
-    + [CRAN](http://cran.r-project.org)
+    + [Omegahat](http://www.omegahat.org/R)
     + [Bioconductor Project](http://bioconductor.org)
-    + [R Forge](https://r-forge.r-project.org/), etc.
+    + [R Forge](https://r-forge.r-project.org/), entre otros.
+    
+Algunos de los paquetes se encuentran en formato binario, para su instalación basta adicionar el parámetro 
+___type="source"___.
+
+```{r, eval=FALSE}
+install.packages("pckgname", repos="http://www.omegahat.org/R", type="source")
+install.packages("pckgname", repos="http://r-forge.r-project.org", type="source")
+install.packages("pckgname", repos="http://www.bioconductor.org/packages/2.10/bioc", type="source")
+```
+
 
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Instalando paquetes </font> </b>
 
+Una de las principales ventajas de R es su capacidad para incrementar su funcionalidad mediante la incorporación de nuevos paquetes o librerías.
+
 * Para instalar un paquete se utiliza la linea de código:
 
 ```{r, eval=FALSE}
-install.packages("tseries", dependencies = TRUE)
+install.packages("pckgname")
 ```
+Ciertos paquetes de R requieren la instalación de otros paquetes adicionales debido que entre estos comparten algunas funciones, por lo cual es necesario adicionar el siguiente parámetro:
+```{r, eval=FALSE}
+install.packages("pckgname", dependencies=TRUE)
+```
+En el caso que se desee instalar un lista de $n$ paquetes planteamos la siguiente solución:
+```{r, eval=FALSE}
+paquetes <- c("pckg_1","pckg_2", ... , "pckg_n")
+lapply(seq_along(paquetes), function(i){
+      install.packages(paquetes[[i]], dependencies=TRUE)
+      })
+```
+
+##
+
+Para visualizar el listado completo de los paquetes instalados podemos recurrir al comando ___library()___. 
+Para conocer la totalidad de paquetes que se encuentran albergados en la CRAN, y a su vez verificar cuales de ellos se encuentran válidos y disponibles para su uso, empleamos los comandos:
+```{r, eval=FALSE}
+installed.packages()
+available.packages()
+```
+Para conocer los paquetes cargados en el área de trabajo utilizamos:
+```{r, eval=TRUE}
+sessionInfo()
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Git & Github </font> </b>
+
+GitHub es un repositorio de archivos y proyectos el cual emplea un sistema de control de versiones conocido como Git y permite almacenar el código en repositorios de forma pública.
+
+La instalación y sincronización de Git & Github con RStudio se realiza de la siguiente manera:
+
+  * Descargar e instalar la plataforma específica de [Git](http://www.git-scm.com/) con las opciones por default.
+  * Configurar Git con los comandos globales a través de la versión bash, esto permitirá que Git tenga conexión con los repositorios de Github para el envió/recepción de archivos, teclear lo siguiente:
+```{r, eval=FALSE}
+  git config –-global user.name ''nombre de la cuenta de Github''
+
+  git config –-global user.email ''Github-email@something.com''
+```
+  * Por último, abrir RStudio y configurar la ruta del ejecutable de Git: Ir a Tools > Options > Git/SVN.
 
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Estructuras de Datos </font> </b>
