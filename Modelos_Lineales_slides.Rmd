@@ -1,7 +1,7 @@
 ---
-title: "Modelos Lineales y Diseño de Experimentos"
-subtitle: Historia y Generalidades de R
-author: "Alex E. Pérez Tatamués"
+title: "Historia y Generalidades de R"
+subtitle: "Source Stat Lab Ec"
+author: "Alex E. Pérez, Diego P. Huaraca"
 date: "Abril, 2015"
 output:
   ioslides_presentation:
@@ -12,6 +12,7 @@ output:
     widescreen: yes
   beamer_presentation: default
 ---
+
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Qué es R ? </font> </b>
 * __R es un dialecto de S__
@@ -95,7 +96,7 @@ search()
 - Las funciones internas de estos paquetes pueden ser modificadas únicamente
 por el R Core Team.
 
-##
+## <b> <font color=SteelBlue face=Cambria size=7> Diseño del sistema R </font> </b>
 
 __2. El resto.__ 
 
@@ -142,7 +143,8 @@ lapply(seq_along(paquetes), function(i){
       })
 ```
 
-##
+
+## <b> <font color=SteelBlue face=Cambria size=7> Instalando paquetes </font> </b>
 
 Para visualizar el listado completo de los paquetes instalados podemos recurrir al comando ___library()___. 
 Para conocer la totalidad de paquetes que se encuentran albergados en la CRAN, y a su vez verificar cuales de ellos se encuentran válidos y disponibles para su uso, empleamos los comandos:
@@ -150,6 +152,9 @@ Para conocer la totalidad de paquetes que se encuentran albergados en la CRAN, y
 installed.packages()
 available.packages()
 ```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Instalando paquetes </font> </b>
+
 Para conocer los paquetes cargados en el área de trabajo utilizamos:
 ```{r, eval=TRUE}
 sessionInfo()
@@ -168,12 +173,14 @@ La instalación y sincronización de Git & Github con RStudio se realiza de la s
 
   * Descargar e instalar la plataforma específica de [Git](http://www.git-scm.com/) con las opciones por default.
   * Configurar Git con los comandos globales a través de la versión bash, esto permitirá que Git tenga conexión con los repositorios de Github para el envió/recepción de archivos, teclear lo siguiente:
-```{r, eval=FALSE}
-  git config –-global user.name ''nombre de la cuenta de Github''
 
-  git config –-global user.email ''Github-email@something.com''
+```{r, eval=FALSE}
+  git config --global user.name "nombre de la cuenta de Github"
+
+  git config --global user.email "Github-email@something.com"
 ```
-  * Por último, abrir RStudio y configurar la ruta del ejecutable de Git: Ir a Tools > Options > Git/SVN.
+
+* Por último, abrir RStudio y configurar la ruta del ejecutable de Git: Ir a Tools > Options > Git/SVN.
 
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Estructuras de Datos </font> </b>
