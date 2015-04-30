@@ -1,0 +1,139 @@
+\documentclass[12pt,a4paper,oneside]{article}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{pst-eucl,pstricks,pstricks-add}
+\usepackage[utf8]{inputenc}
+%\usepackage[latin1]{inputenc}
+\usepackage[spanish,activeacute]{babel}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{color}
+\usepackage{url}
+\usepackage{float}
+\usepackage{cite}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{lmodern}
+\usepackage{setspace}
+%\doublespace %para doble espacio
+\onehalfspace %para espacio y medio
+\newcommand{\code}[1]{\fcolorbox{blue!80}{gray!10}{#1}}
+\parindent=0mm
+
+\begin{document}
+%\SweaveOpts{concordance=TRUE}
+\rule[1mm]{162mm}{0.20mm}
+\begin{minipage}[d]{30mm}
+\begin{center}
+\includegraphics[scale=.30]{figures/logo_epn.png}
+\end{center}
+\end{minipage}
+\begin{minipage}[d]{100mm}
+\begin{center}
+\vspace{0.5cm}
+\textsf{\textbf{\large ESCUELA POLITÉCNICA NACIONAL}}\\
+\textsf{\textbf{\small FACULTAD DE CIENCIAS}}\\
+\textsf{\textbf{\small MODELOS LINEALES Y DISEÑO DE EXPERIMENTOS}}\\
+\textsf{\textbf{\small DEBER 01}}\\
+\end{center}
+\end{minipage}
+\begin{minipage}[d]{30mm}
+\begin{center}
+\includegraphics[scale=.30]{figures/logo_fc.png}
+\end{center}
+\end{minipage}\\
+
+\rule[1mm]{162mm}{0.20mm}
+\begin{flushright}
+{\sf \small Fecha entrega: 2015/05/06}
+\end{flushright}
+
+\begin{center}
+\textsf{\textbf{\small EJERCICIOS}}
+\end{center}
+
+
+\begin{enumerate}
+\item[\bf{1.}] Sea X un vector aleatorio de ley normal de parámetros $\mu, \Sigma$:
+
+\begin{equation*}
+X =\left(\begin{array}{l} X_1\\
+                          X_2\\
+                          X_3	
+\end{array} \right),
+\mu =\left(\begin{array}{l} 1\\
+	                    1\\
+                            1	
+\end{array} \right),
+\Sigma =\left(\begin{array}{c} \mbox{1\,\, 1\,\, 1}\\
+     	                    \mbox{1\,\, 2\,\, 1}\\
+                            \mbox{1\,\, 1\,\, 4}	
+\end{array} \right)
+\end{equation*}
+
+\begin{enumerate}
+\item[\bf{a.}] Demuestre que $\Sigma$ es simétrica definida positiva.
+\item[\bf{b.}] Escriba la función de densidad de X.
+\item[\bf{c.}] Escriba la función característica de X.
+\item[\bf{d.}] ?`Cuál es la ley de $X_1+2X_2-X_3$?
+\item[\bf{e.}] ?`Cuál es la ley del vector U?
+\begin{equation*}
+U =\left(\begin{array}{c}  2X_1-X_2\\
+                          -X_2+2X_3\\        
+\end{array} \right)
+\end{equation*}
+\item[\bf{f.}] Encuentre la ley codicional de $(X_1,X_2)$ dado $X_3=x_3$
+\item[\bf{g.}] Encuentre la ley codicional de $X_2$ dado $(X_1,X_3)=(x_1,x_3)$
+\item[\bf{h.}] Encuentre la función de regresión lineal de $X_2$ en $x_1,x_3$, los coeficentes de regresión y la varianza parcial.
+\end{enumerate}
+
+
+\item[\bf{2.}] Sea X un vector aleatorio de ley normal de parámetros $\mu, \Sigma$:
+
+\begin{equation*}
+X =\left(\begin{array}{l} X_1\\
+                          X_2\\
+                          X_3        
+\end{array} \right),
+\mu =\left(\begin{array}{c} -3\\
+	                    1\\
+                            4	
+\end{array} \right),
+\Sigma =\left(\begin{array}{c} \mbox{ 1\,\,-2\,\, 0}\\
+     	                    \mbox{-2\,\, 5\,\, 0}\\
+                            \mbox{ 0\,\, 0\,\, 2}	
+\end{array} \right)
+\end{equation*}
+?`Son independientes las siguientes variables (o vectores aleatorias)
+
+\begin{enumerate}
+\item[\bf{a.}] $X_1$ y $X_2$.
+\item[\bf{b.}] $(X_1,X_2)$ y $X_3$.
+\item[\bf{c.}] $\frac{X_1+X_2}{2}$ y $X_3$.
+\item[\bf{d.}] $X_2$ y $X_2-\frac{5}{2}X_1-X_3$.
+\end{enumerate}
+
+\item[\bf{3.}] Si $X_1,X_2$ son variables aleatorias tales que:
+\begin{equation*}
+X_1+X_2, X_1-X_2
+\end{equation*}
+son independientes de ley normal centrada y reducida, demuestre que el par $(X_1,X_2)$ es normalmente distribuido.
+
+\item[\bf{4.}] Sean $X\rightsquigarrow \textit{N}_n(\mu, \Sigma)$, $A$ una matriz $r x n$, $c$ un vector de $r$ componentes, entonces:
+\begin{equation*}
+AX+c \rightsquigarrow \textit{N}_r(A\mu+c, A\Sigma A^t)
+\end{equation*}
+
+\item[\bf{5.}] Demuestre que si $X\rightsquigarrow \chi^2_{n,\delta^2}$, entonces:
+\begin{equation*}
+E(X)=\delta^2+n 
+\end{equation*}
+\begin{equation*}
+Var(X)=4\delta^2+2n
+\end{equation*}
+
+
+\end{enumerate}
+
+\end{document}
