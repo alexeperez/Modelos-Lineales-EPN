@@ -388,6 +388,7 @@ x$nomb_obj
 2. Cuál es la diferencia entre un vector y una lista ?. Entre una matriz y un data frame ?.
 3. Cuál es la jerarquía de coerción para los vectores ?.
 4. 
+5.
 
 
 
