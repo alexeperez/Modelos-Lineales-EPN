@@ -1,8 +1,8 @@
 ---
-title: "Historia y Generalidades de R"
-subtitle: "Source Stat Lab Ec"
-author: "Alex E. Pérez, Diego P. Huaraca"
-date: "Abril, 2015"
+title: "MODELOS LINELAES"
+subtitle: "Historia, Generalidades, Estructuras de Datos en R"
+author: "Source Stat Lab Ec"
+date: "Mayo, 2015"
 output:
   ioslides_presentation:
     logo: logo_ssl.jpeg
@@ -90,6 +90,8 @@ que permiten ampliar la capacidad  de los gráficos, funciones estadísticas cl�
 Los paquetes estándar pueden ser visualizados a través del siguiente comando:
 
 ```{r}
+# no se muestran advertencias
+options(warn=-1)
 search()
 ```
 
@@ -128,9 +130,24 @@ install.packages("pckgname", dependencies=TRUE)
 En el caso que se desee instalar un lista de $n$ paquetes planteamos la siguiente solución:
 ```{r, eval=FALSE}
 paquetes <- c("pckg_1","pckg_2", ... , "pckg_n")
-lapply(seq_along(paquetes), function(i){
-      install.packages(paquetes[[i]], dependencies=TRUE)
-      })
+install.packages(paquetes, dependencies=TRUE)
+# funciones apply
+# sapply(X=paquetes, FUN=install.packages, dependencies=TRUE)
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Ejemplos </font> </b>
+* Para instalar el paquete de nombre "devtools", utilizamos la línea de código:
+
+```{r , echo=TRUE,eval=FALSE}
+install.packages("devtools", dependencies = TRUE)
+```
+
+* Para instalar los paquetes "foreign", "forecast", "gWidgets", utilizamos:
+```{r, eval=FALSE}
+paquetes <- c("foreign", "forecast", "gWidgets")
+install.packages(paquetes, dependencies=TRUE)
+# funciones apply
+# sapply(X=paquetes, FUN=install.packages, dependencies=TRUE)
 ```
 
 
@@ -169,13 +186,22 @@ sessionInfo()
 ```
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Cargando paquetes </font> </b>
-
-* Una vez instalado el paquete, se debe proceder a cargarlo en el área de trabajo, para poder utilizar las funciones en él implementadas, para ello utilizamos:
 ```{r, eval=TRUE}
-library("ggplot2")
+# paquetes cargados
+(.packages())
 ```
 
-* Para visualizar el listado de paquetes cargados en el área de trabajo se utiliza:
+* Para cargar un paquete O varios paquetes nuevos a la vez, al área de trabajo
+utilizamos:
+```{r, eval=TRUE}
+library("devtools")
+```
+
+```{r, eval=FALSE}
+paquetes <- c("foreign", "forecast", "gWidgets")
+sapply(X=paquetes, FUN=library,character.only=TRUE)
+```
+
 ```{r, eval=TRUE}
 # paquetes cargados
 (.packages())
@@ -183,17 +209,17 @@ library("ggplot2")
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Git & Github </font> </b>
 
-GitHub es un repositorio de archivos y proyectos el cual emplea un sistema de control de versiones conocido como Git y permite almacenar el código en repositorios de forma pública.
+* GitHub es un repositorio de archivos y proyectos el cual emplea un sistema de control de versiones conocido como Git y permite almacenar el código en repositorios de forma pública.
 
 <p align="center"> 
 ![Github](figures/github.jpg)
 </p>
 
 
-La instalación y sincronización de Git & Github con RStudio se realiza de la siguiente manera:
+* La instalación y sincronización de Git & Github con RStudio se realiza de la siguiente manera:
 
-  * Descargar e instalar la plataforma específica de [Git](http://www.git-scm.com/) con las opciones por default.
-  * Configurar Git con los comandos globales a través de la versión bash, esto permitirá que Git tenga conexión con los repositorios de Github para el envió/recepción de archivos, teclear lo siguiente:
+    + Descargar e instalar la plataforma específica de [Git](http://www.git-scm.com/) con las opciones por default.
+    + Configurar Git con los comandos globales a través de la versión bash, esto permitirá que Git tenga conexión con los repositorios de Github para el envió/recepción de archivos, teclear lo siguiente:
 
 ```{r, eval=FALSE}
   git config --global user.name "nombre de la cuenta de Github"
@@ -214,29 +240,26 @@ Dimensión | Homogeneos | Heterogeneos
 2d | Matrix        |Data Frame
 nd | Array         | 
 
-```
-R no tiene estructuras 0d, los números y strings se consideran como vectores de longitud 1
-```
+\n
 
-La función `str()` (structure) presenta una descripción compacta de la estructura de datos.
-```{r, eval=TRUE}
-str(cars)
-```
+* __Observación.__ R no tiene estructuras 0d (magnitudes escalares), los números y strings se consideran como vectores de longitud 1
 
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Vectores </font> </b>
 
-La estructura de datos básica de R son los vectores, estos se dividen en:
+* La estructura de datos básica de R son los vectores, estos se dividen en:
+    + __Vectores atómicos y Listas__
 
-* __Vectores atómicos y Listas__
+* Presentan tres propiedades comunes:
+    + Tipo (Qué es?). `typeof()`
+    + Longitud (Número de elementos) `length()`
+    + Atributos (Metadata). `attributes()`
 
-y presentan tres propiedades comunes:
-
-1. Tipo (Qué es?). `typeof()`
-2. Longitud (Número de elementos) `length()`
-3. Atributos (Metadata). `attributes()`
-
-* Para probar que una estructura de datos es un vector (con un solo atributo __names__) se utiliza la función `is.vector()`. 
+* Para probar que una estructura de datos es un vector (atómico o lista) se utiliza la función:
+```{r,eval=FALSE}
+is.vector(x)
+```
+* `is.vector(x)` retorna `TRUE` si `x` es un vector atómico o una lista.
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Vectores atómicos </font> </b>
 
@@ -337,6 +360,7 @@ mean(x) # proporción de TRUEs
 * Para construir una lista se utiliza la función `list()` en lugar de `c()`. 
 ```{r}
 x <- list(1:3, c("Source", "Stat", "Lab"), c(TRUE, FALSE), c(1.3, 4.5))
+# El operador `:` se usa para generar secuencias enteras
 str(x)
 is.atomic(x)
 ```
@@ -355,6 +379,8 @@ is.list(x)
 # pasamos a vector considerando las reglas de coerción
 unlist(x)
 ```
+
+
 
 ## <b> <font color=SteelBlue face=Cambria size=7> Listas </font> </b>
 
@@ -382,18 +408,195 @@ x[[4]]
 x$nomb_obj
 ```
 
+
 ## <b> <font color=SteelBlue face=Cambria size=7> Quiz </font> </b>
 
 1. Enumere los tipos de datos que R puede almacenar en un vector.
 2. Cuál es la diferencia entre un vector y una lista ?. Entre una matriz y un data frame ?.
 3. Cuál es la jerarquía de coerción para los vectores ?.
-4. 
-5.
 
 
+## <b> <font color=SteelBlue face=Cambria size=7> Atributos </font> </b>
+
+* Los objetos en R poseen varios atributos tales como:
+    + nombres
+    + clase
+    + dimensiones, etc
+* La función `attributes()` muestra los atributos de un objeto.
+
+```{r}
+x <- c(1:5)
+attributes(x)
+x <- list(nomb_obj1=1:3, nomb_obj2=c("Source", "Stat", "Lab"), nomb_obj3=c(TRUE, FALSE))
+attributes(x)
+```
+ 
+## <b> <font color=SteelBlue face=Cambria size=7> Matrices </font> </b>
+* Una matriz es un vector con el atributo `dimensión`
+* La `dimensión` es un vector de longitud 2: `c(nrow, ncol)`
+
+```{r}
+A <- matrix (c(1:9),nrow=3, ncol=3, byrow=FALSE)
+# se construye por columnas por default (byrow=FALSE)
+A
+```
+
+```{r}
+attributes(A)
+```
+## <b> <font color=SteelBlue face=Cambria size=7> Matrices </font> </b>
+* `dim()` se usa para añadir el atributo `dimensión` a un vector, o
+para hallar la `dimensión` de una matriz.
+```{r}
+A <- 1:9
+A
+dim(A) <- c(3,3)
+A
+```
+
+```{r}
+A <- matrix (c(1:9),nrow=3, ncol=3)
+dim(A)
+```
 
 
+## <b> <font color=SteelBlue face=Cambria size=7> Accediendo a elementos </font> </b>
+```{r}
+(A <- matrix (c(1:9),nrow=3, ncol=3, byrow=FALSE))
+A[1,2] # componente
+A[,3]  # columna
+A[1,]  # fila
+```
 
+## <b> <font color=SteelBlue face=Cambria size=7> Factores </font> </b>
+* Se usan para representar variables categóricas. Es mejor utilizar factores con etiquetas, que vectores enteros.
+    + "Femenino" y "Masculino" que 0 y 1 
+```{r}
+x <- factor(x=c(0,1,1,0,1,0,1), levels=c(0,1), labels = c("Femenino", "Masculino"))
+x
+attributes(x)
+```
 
+## <b> <font color=SteelBlue face=Cambria size=7> Factores </font> </b>
+```{r}
+# frecuencias
+table(x)
+# para considerar las etiquetas
+unclass(x)
+```
 
+## <b> <font color=SteelBlue face=Cambria size=7> Data Frame </font> </b>
+* Propiedades:
+    + Es una lista en la que todos los elementos tienen la misma longitud
+    + Es la estructura de datos más utilizada para almacenar data tabulada
+    + A diferencia de las matrices, pueden almacenar vectores atómicos de cualquier tipo
+    + Presentan varios atributos adicionales `class`, `rownames`, `names`, etc
+
+* R dentro de sus bases de datos posee un sin número de data frames, por ejemplo:
+```{r}
+data(mtcars)
+# visualizar data frame
+View(mtcars)
+head(mtcars,n = 4)
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Data Frame </font> </b>
+```{r}
+# atributos names, rownames, class
+attributes(mtcars)
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Data Frame </font> </b>
+
+```{r}
+# dimensión
+dim(mtcars)
+nrow(mtcars)  ;  ncol(mtcars)
+colnames(mtcars) # nombres de columnas
+# nombres filas: rownames()
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Función structure </font> </b>
+La función `str()` (structure) presenta una descripción compacta de la estructura de datos. Usar `View()` es costoso computacionalmente.
+```{r, eval=TRUE}
+str(mtcars)
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Missing Values </font> </b>
+* Los valores pérdidos en R se denotan por `NA`, `NaN`.
+* `NA` Not Available. Dato pérdido.
+* `NaN` Not a Number. Resultado de una indeterminación.
+    + `NaN` es `NA`, el reciproco no se cumple.
+
+```{r}
+x <- c(Inf*0, 3.2, NA, 5, NA)
+x
+```
+```{r}
+x <- c(-1, 0/0, NA, 5, -6)
+x
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Missing Values </font> </b>
+
+* is.na(). prueba si un objeto es NA.
+* is.nan(). prueba si un objeto es NaN.
+```{r}
+x <- c(Inf*0, 3.2, NA, 5, NA)
+is.na(x)
+```
+```{r}
+x <- c(-1, 0/0, NA, 5, -6)
+is.nan(x)
+```
+* `Inf` representa $\infty$
+
+## <b> <font color=SteelBlue face=Cambria size=7> Sentencia if </font> </b>
+* Se utiliza para testear una proposición y realizar una determinada operacion
+
+```{r}
+x <- 2
+if (x>5){
+        y <- x+5
+}else{
+        y <- x+10
+}
+print(y)
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Sentencia for </font> </b>
+* Se utiliza para testear una proposición y realizar una determinada operación
+
+```{r}
+x <- 1:5
+for (i in 1:length(x)){
+        y <- x[i]*2
+        print(y)
+}
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Subsetting </font> </b>
+* la función `subset()` se utiliza para seleccionar elementos de un objeto.
+
+```{r}
+x <- 1:5
+y <- subset(x,subset = x>3)
+y <- x[x>3]
+y
+```
+
+```{r}
+x <- c(1, 8, NA, 3, NA)
+y <- subset(x,subset = !is.na(x))
+y <- x[!is.na(x)]
+y
+```
+
+## <b> <font color=SteelBlue face=Cambria size=7> Subsetting </font> </b>
+```{r}
+table(mtcars[,"cyl"])
+data <- subset(mtcars, subset = mtcars[,"cyl"]!=6)
+# data <- subset(mtcars, subset = mtcars[,3]!=6)
+table(data[,"cyl"])
+```
 
