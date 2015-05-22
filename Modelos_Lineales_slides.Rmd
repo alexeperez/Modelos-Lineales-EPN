@@ -600,13 +600,3 @@ data <- subset(mtcars, subset = mtcars[,"cyl"]!=6)
 table(data[,"cyl"])
 ```
 
-
-## <b> <font color=SteelBlue face=Cambria size=7> DIAPOSITIVA PRUEBA </font> </b>
-```{r}
-table(mtcars[,"cyl"])
-data <- subset(mtcars, subset = mtcars[,"cyl"]!=6)
-# data <- subset(mtcars, subset = mtcars[,3]!=6)
-table(data[,"cyl"])
-```
-
-
